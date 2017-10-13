@@ -27,7 +27,7 @@ check_git_deps: check_cmd_git check_cmd_curl check_cmd_sudo
 
 $(GIT_FLOW_PATH):
 	@echo "*** Installing git flow ***"
-	@curl -fsS https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh | bash -s - install stable
+	@curl -fsS https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh | sudo bash -s - install stable
 	@rm -rf ./gitflow
 
 
