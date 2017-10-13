@@ -1,14 +1,20 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="gentoo"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -45,26 +51,27 @@ ZSH_THEME="gentoo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose gem git-flow-avh vi-mode tmux tmuxinator)
+plugins=(gitfast docker git-flow-avh history vi-mode tmux tmuxinator common-aliases)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# want your terminal to support 256 color schemes? I do ...
-#export TERM="xterm-256color"
-[ -z "$TMUX" ] && export TERM=xterm-256color
-
-# Load local config
-source $HOME/.zshrc_local
-
-# Start oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-
-# line search
-bindkey "^[OA" history-beginning-search-backward
-bindkey "^[OB" history-beginning-search-forward
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -74,7 +81,22 @@ bindkey "^[OB" history-beginning-search-forward
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+
+# ---------------------------------------------------------
+
+# Load local configs
+for file in $(find ~/.zshrc_local_conf -iname "*.zshrc"); do
+    source "$file"
+done
+
+# want your terminal to support 256 color schemes? I do ...
+#export TERM="xterm-256color"
+[ -z "$TMUX" ] && export TERM=xterm-256color
+
+# line search
+bindkey "^[OA" history-beginning-search-backward
+bindkey "^[OB" history-beginning-search-forward
+
 # Personal functions
 serve () {
   serve_port="${1:-3000}"
