@@ -8,6 +8,8 @@ To check deps and install everything: `make install`
 
 * git
 * [git flow avh]
+  * sudo
+  * curl
 
 
 ## tmux
@@ -15,7 +17,10 @@ To check deps and install everything: `make install`
 ### Requirements
 
 * tmux
-* tmuxinarot -> gem -> ruby
+  * ncurses
+* tmuxinarot
+  * gem
+    * ruby
 
 
 ## zsh
@@ -24,6 +29,7 @@ To check deps and install everything: `make install`
 
 * zsh
 * [oh-my-zsh]
+  * curl
 * `~/.zshrc_local_conf/` directory with `.zshrc` files
 
 
