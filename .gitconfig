@@ -1,5 +1,5 @@
 [user]
-	name = szymon
+	name = simonk
 	email = s.kopciewski@gmail.com
 [push]
 	default = simple
@@ -12,5 +12,4 @@
 	ci = commit
 	co = checkout
 	cm = checkout master
-	mm = merge master
 	s = status
