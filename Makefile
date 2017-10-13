@@ -48,7 +48,14 @@ prepare_tmux: check_tmux_deps tmuxinator $(TMUX_CONFIG)
 
 check_tmux_deps: check_cmd_tmux check_cmd_gem
 
-tmuxinator: 
-	@which tmuxinator &>/dev/null || gem install -N tmuxinator
+tmuxinator: ruby_env
+	@which tmuxinator &>/dev/null || GEM_HOME="$$(ruby -e 'print Gem.user_dir')" gem install -N tmuxinator
+
+ruby_env: $(ZSH_CONFIG_LOCAL) $(ZSH_CONFIG_LOCAL)/ruby_env.zshrc
+
+$(ZSH_CONFIG_LOCAL)/ruby_env.zshrc:
+	@echo 'GEM_HOME=$$(ruby -e "print Gem.user_dir")' > $@
+	@echo 'SBIN="$$HOME/sbin"' >> $@
+	@echo 'export PATH=$$GEM_HOME/bin:$$PATH' >> $@
 
 .PHONY: install prepare_git check_git_deps prepare_zsh prepare_tmux check_tmux_deps tmuxinator
