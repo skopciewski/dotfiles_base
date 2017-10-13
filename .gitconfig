@@ -1,0 +1,16 @@
+[user]
+	name = szymon
+	email = s.kopciewski@gmail.com
+[push]
+	default = simple
+[core]
+	editor = vim
+[color]
+	ui = true
+[alias]
+	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	ci = commit
+	co = checkout
+	cm = checkout master
+	mm = merge master
+	s = status
