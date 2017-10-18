@@ -11,7 +11,7 @@ install: prepare_git prepare_zsh prepare_tmux
 
 # link current dot file to the home dir
 $(HOME)/%: %
-	ln -fs $(PWD)/$< $@
+	@ln -fs $(PWD)/$< $@
 
 # check specific comand
 check_cmd_%:
@@ -32,12 +32,19 @@ $(GIT_FLOW_PATH):
 
 
 # for zsh
-prepare_zsh: check_zsh_deps $(ZSH_CONFIG) $(ZSH_CONFIG_LOCAL) $(OH_MY_ZSH_DIR)
+prepare_zsh: check_zsh_deps $(ZSH_CONFIG) set_zsh_env $(OH_MY_ZSH_DIR)
 
 check_zsh_deps: check_cmd_zsh
 
+set_zsh_env: $(ZSH_CONFIG_LOCAL)/local_env.zshrc
+
+$(ZSH_CONFIG_LOCAL)/local_env.zshrc: $(ZSH_CONFIG_LOCAL)
+	@echo "*** Creating local env ***"
+	@echo "export EDITOR=vim" > $@
+	@echo "export SHELL=/bin/zsh" >> $@
+
 $(ZSH_CONFIG_LOCAL):
-	mkdir $(ZSH_CONFIG_LOCAL)
+	@mkdir $(ZSH_CONFIG_LOCAL)
 
 $(OH_MY_ZSH_DIR):
 	@echo "*** Downloading oh-my-zsh ***"
@@ -48,14 +55,15 @@ prepare_tmux: check_tmux_deps tmuxinator $(TMUX_CONFIG)
 
 check_tmux_deps: check_cmd_tmux check_cmd_gem
 
-tmuxinator: ruby_env
+tmuxinator: set_ruby_env
 	@which tmuxinator &>/dev/null || GEM_HOME="$$(ruby -e 'print Gem.user_dir')" gem install -N tmuxinator
 
-ruby_env: $(ZSH_CONFIG_LOCAL) $(ZSH_CONFIG_LOCAL)/ruby_env.zshrc
+set_ruby_env: $(ZSH_CONFIG_LOCAL)/ruby_env.zshrc
 
-$(ZSH_CONFIG_LOCAL)/ruby_env.zshrc:
+$(ZSH_CONFIG_LOCAL)/ruby_env.zshrc: $(ZSH_CONFIG_LOCAL)
+	@echo "*** Creating ruby env ***"
 	@echo 'GEM_HOME=$$(ruby -e "print Gem.user_dir")' > $@
 	@echo 'SBIN="$$HOME/sbin"' >> $@
 	@echo 'export PATH=$$GEM_HOME/bin:$$PATH' >> $@
 
-.PHONY: install prepare_git check_git_deps prepare_zsh prepare_tmux check_tmux_deps tmuxinator
+.PHONY: install prepare_git check_git_deps prepare_zsh check_zsh_deps set_zsh_env prepare_tmux check_tmux_deps tmuxinator set_ruby_env
