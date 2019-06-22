@@ -55,8 +55,6 @@ plugins=(docker git git-flow-avh history vi-mode tmux tmuxinator common-aliases)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-source $ZSH/oh-my-zsh.sh
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -88,6 +86,8 @@ source $ZSH/oh-my-zsh.sh
 for file in $(find ~/.zshrc_local_conf -iname "*.zshrc"); do
     source "$file"
 done
+
+source $ZSH/oh-my-zsh.sh
 
 # want your terminal to support 256 color schemes? I do ...
 #export TERM="xterm-256color"
