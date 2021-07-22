@@ -63,7 +63,7 @@ prepare_tmux: check_tmux_deps tmuxinator $(TMUX_CONFIG)
 check_tmux_deps: check_cmd_tmux check_cmd_gem
 
 tmuxinator: set_ruby_env
-	@which tmuxinator &>/dev/null || GEM_HOME="$$(ruby -e 'print Gem.user_dir')" gem install -N tmuxinator
+	@which tmuxinator &>/dev/null || GEM_HOME="$$(ruby -e 'print Gem.user_dir')" gem install -N tmuxinator -v 2.0.3
 
 set_ruby_env: $(ZSH_CONFIG_LOCAL)/ruby_env.zshrc
 
