@@ -13,3 +13,5 @@
 	co = checkout
 	cm = checkout master
 	s = status
+[pull]
+	rebase = false
