@@ -1,5 +1,6 @@
 OH_MY_ZSH_DIR := $(HOME)/.oh-my-zsh
 ZSH_CONFIG := $(HOME)/.zshrc
+ZSH_ALIASES := $(HOME)/.zshrc_local_aliases
 ZSH_CONFIG_LOCAL := $(HOME)/.zshrc_local_conf
 
 TMUX_CONFIG := $(HOME)/.tmux.conf
@@ -41,13 +42,16 @@ prepare_zsh: check_zsh_deps $(ZSH_CONFIG) set_zsh_env $(OH_MY_ZSH_DIR)
 
 check_zsh_deps: check_cmd_zsh
 
-set_zsh_env: $(ZSH_CONFIG_LOCAL) $(ZSH_CONFIG_LOCAL)/local_env.zshrc $(HOME)/sbin
+set_zsh_env: $(ZSH_CONFIG_LOCAL) $(ZSH_CONFIG_LOCAL)/local_env.zshrc $(HOME)/sbin $(ZSH_ALIASES)
 
 $(ZSH_CONFIG_LOCAL):
 	@mkdir $(ZSH_CONFIG_LOCAL)
 
 $(HOME)/sbin:
 	@mkdir $(HOME)/sbin
+
+$(ZSH_ALIASES):
+	@mkdir $(ZSH_ALIASES)
 
 $(OH_MY_ZSH_DIR):
 	@echo "*** Downloading oh-my-zsh ***"
