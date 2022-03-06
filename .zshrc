@@ -82,12 +82,13 @@ plugins=(docker git git-flow-avh history vi-mode tmux tmuxinator common-aliases)
 
 # ---------------------------------------------------------
 
+source $ZSH/oh-my-zsh.sh
+
 # Load local configs
 for file in $(find ~/.zshrc_local_conf -iname "*.zshrc"); do
     source "$file"
 done
 
-source $ZSH/oh-my-zsh.sh
 
 # want your terminal to support 256 color schemes? I do ...
 #export TERM="xterm-256color"
