@@ -99,9 +99,3 @@ bindkey "^[OB" history-beginning-search-forward
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
-# Personal functions
-serve () {
-  serve_port="${1:-3000}"
-  serve_location="${2:-.}"
-  ruby -run -e httpd ${serve_location} -p ${serve_port}
-}
