@@ -96,7 +96,7 @@ done
 
 # want your terminal to support 256 color schemes? I do ...
 #export TERM="xterm-256color"
-[ -z "$TMUX" ] && export TERM=xterm-256color
+#[ -z "$TMUX" ] && export TERM=xterm-256color
 
 # line search
 bindkey "^[OA" history-beginning-search-backward
