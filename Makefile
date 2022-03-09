@@ -9,6 +9,7 @@ GIT_CONFIG := $(HOME)/.gitconfig
 GIT_FLOW_PATH := /usr/local/bin/git-flow
 
 install: prepare_git prepare_zsh prepare_tmux
+.PHONY: install
 
 # link current dot file to the home dir
 $(HOME)/%: %
@@ -28,8 +29,10 @@ check_cmd_%:
 
 # for git
 prepare_git: check_git_deps $(GIT_FLOW_PATH) $(GIT_CONFIG)
+.PHONY: prepare_git
 
 check_git_deps: check_cmd_git check_cmd_curl check_cmd_sudo
+.PHONY: check_git_deps
 
 $(GIT_FLOW_PATH):
 	@echo "*** Installing git flow ***"
@@ -39,10 +42,13 @@ $(GIT_FLOW_PATH):
 
 # for zsh
 prepare_zsh: check_zsh_deps $(ZSH_CONFIG) set_zsh_env $(OH_MY_ZSH_DIR)
+.PHONY: prepare_zsh
 
 check_zsh_deps: check_cmd_zsh
+.PHONY: check_zsh_deps
 
 set_zsh_env: $(ZSH_CONFIG_LOCAL) $(ZSH_CONFIG_LOCAL)/local_env.zshrc $(HOME)/sbin $(ZSH_ALIASES)
+.PHONY: set_zsh_env
 
 $(ZSH_CONFIG_LOCAL):
 	@mkdir $(ZSH_CONFIG_LOCAL)
@@ -59,13 +65,6 @@ $(OH_MY_ZSH_DIR):
 
 
 # for tmux
-prepare_tmux: check_tmux_deps tmuxinator $(TMUX_CONFIG)
+prepare_tmux: check_cmd_tmux $(TMUX_CONFIG)
+.PHONY: prepare_tmux
 
-check_tmux_deps: check_cmd_tmux check_cmd_gem
-
-tmuxinator: set_ruby_env
-	@which tmuxinator &>/dev/null || GEM_HOME="$$(ruby -e 'print Gem.user_dir')" gem install -N tmuxinator -v 2.0.3
-
-set_ruby_env: $(ZSH_CONFIG_LOCAL) $(ZSH_CONFIG_LOCAL)/ruby_env.zshrc
-
-.PHONY: install prepare_git check_git_deps prepare_zsh check_zsh_deps set_zsh_env prepare_tmux check_tmux_deps tmuxinator set_ruby_env

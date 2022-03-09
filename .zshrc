@@ -51,7 +51,7 @@ ZSH_THEME="gentoo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker git git-flow-avh history vi-mode tmux tmuxinator common-aliases)
+plugins=(docker git git-flow-avh history vi-mode tmux common-aliases)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -96,7 +96,7 @@ done
 
 # want your terminal to support 256 color schemes? I do ...
 #export TERM="xterm-256color"
-#[ -z "$TMUX" ] && export TERM=xterm-256color
+[ -z "$TMUX" ] && export TERM=xterm-256color
 
 # line search
 bindkey "^[OA" history-beginning-search-backward
