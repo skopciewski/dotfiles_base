@@ -8,16 +8,14 @@ TMUX_CONFIG := $(HOME)/.tmux.conf
 GIT_CONFIG := $(HOME)/.gitconfig
 GIT_FLOW_PATH := /usr/local/bin/git-flow
 
-install: prepare_git prepare_zsh prepare_tmux
+MC_CONFIG_DIR := $(HOME)/.config/mc
+
+install: prepare_git prepare_zsh prepare_tmux prepare_mc
 .PHONY: install
 
 # link current dot file to the home dir
 $(HOME)/%: %
 	@ln -fs $(PWD)/$< $@
-
-# copy zsh_conf file to the conf dir
-$(ZSH_CONFIG_LOCAL)/%: zsh_conf/%
-	@cp $(PWD)/$< $@
 
 # check specific comand
 check_cmd_%:
@@ -53,6 +51,10 @@ set_zsh_env: $(ZSH_CONFIG_LOCAL) $(ZSH_CONFIG_LOCAL)/local_env.zshrc $(HOME)/sbi
 $(ZSH_CONFIG_LOCAL):
 	@mkdir $(ZSH_CONFIG_LOCAL)
 
+# copy zsh_conf file to the conf dir
+$(ZSH_CONFIG_LOCAL)/%: zsh_conf/%
+	@cp $(PWD)/$< $@
+
 $(HOME)/sbin:
 	@mkdir $(HOME)/sbin
 
@@ -68,3 +70,11 @@ $(OH_MY_ZSH_DIR):
 prepare_tmux: check_cmd_tmux $(TMUX_CONFIG)
 .PHONY: prepare_tmux
 
+
+# for mc
+prepare_mc: $(MC_CONFIG_DIR)
+.PHONY: prepare_mc
+
+$(MC_CONFIG_DIR):
+	@mkdir $(MC_CONFIG_DIR)
+	@cp $(PWD)/.mc_ini $(MC_CONFIG_DIR)/ini
