@@ -76,5 +76,5 @@ prepare_mc: $(MC_CONFIG_DIR)
 .PHONY: prepare_mc
 
 $(MC_CONFIG_DIR):
-	@mkdir $(MC_CONFIG_DIR)
+	@mkdir -p $(MC_CONFIG_DIR)
 	@cp $(PWD)/.mc_ini $(MC_CONFIG_DIR)/ini
