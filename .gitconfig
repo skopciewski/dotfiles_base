@@ -14,6 +14,6 @@
 	cm = checkout master
 	s = status
 [pull]
-	rebase = false
+	rebase = true
 [init]
 	defaultBranch = main
