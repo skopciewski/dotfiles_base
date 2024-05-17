@@ -1,8 +1,6 @@
 [user]
 	name = simonk
 	email = s.kopciewski@dlamnie.net
-[push]
-	default = simple
 [core]
 	editor = vim
 [color]
@@ -11,9 +9,12 @@
 	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	ci = commit
 	co = checkout
-	cm = checkout master
 	s = status
-[pull]
-	rebase = true
 [init]
 	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+	default = simple
+[merge]
+	ff = only
